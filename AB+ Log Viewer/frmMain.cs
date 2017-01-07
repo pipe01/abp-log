@@ -191,5 +191,10 @@ namespace AB__Log_Viewer
             LoadChanges();
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new frmCustomFilters().Show();
+        }
     }
 }

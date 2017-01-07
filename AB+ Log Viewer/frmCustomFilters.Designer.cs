@@ -30,8 +30,6 @@
         {
             this.lbFilters = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtRegex = new System.Windows.Forms.TextBox();
             this.gbMatch = new System.Windows.Forms.GroupBox();
@@ -42,6 +40,7 @@
             this.btnBColor = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
+            this.colorChooser = new System.Windows.Forms.ColorDialog();
             this.panel1.SuspendLayout();
             this.gbMatch.SuspendLayout();
             this.SuspendLayout();
@@ -53,41 +52,23 @@
             this.lbFilters.Name = "lbFilters";
             this.lbFilters.Size = new System.Drawing.Size(94, 134);
             this.lbFilters.TabIndex = 0;
+            this.lbFilters.SelectedIndexChanged += new System.EventHandler(this.lbFilters_SelectedIndexChanged);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.gbMatch);
             this.panel1.Controls.Add(this.txtRegex);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.txtName);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Enabled = false;
             this.panel1.Location = new System.Drawing.Point(112, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(183, 160);
             this.panel1.TabIndex = 1;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Filter name:";
-            // 
-            // txtName
-            // 
-            this.txtName.BackColor = System.Drawing.Color.White;
-            this.txtName.Location = new System.Drawing.Point(70, 7);
-            this.txtName.Name = "txtName";
-            this.txtName.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(104, 20);
-            this.txtName.TabIndex = 1;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 36);
+            this.label2.Location = new System.Drawing.Point(9, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 2;
@@ -95,10 +76,11 @@
             // 
             // txtRegex
             // 
-            this.txtRegex.Location = new System.Drawing.Point(70, 33);
+            this.txtRegex.Location = new System.Drawing.Point(56, 7);
             this.txtRegex.Name = "txtRegex";
-            this.txtRegex.Size = new System.Drawing.Size(104, 20);
+            this.txtRegex.Size = new System.Drawing.Size(124, 20);
             this.txtRegex.TabIndex = 3;
+            this.txtRegex.TextChanged += new System.EventHandler(this.txtRegex_TextChanged);
             // 
             // gbMatch
             // 
@@ -107,7 +89,7 @@
             this.gbMatch.Controls.Add(this.btnColor);
             this.gbMatch.Controls.Add(this.chkColor);
             this.gbMatch.Controls.Add(this.chkVisible);
-            this.gbMatch.Location = new System.Drawing.Point(3, 59);
+            this.gbMatch.Location = new System.Drawing.Point(3, 38);
             this.gbMatch.Name = "gbMatch";
             this.gbMatch.Size = new System.Drawing.Size(177, 99);
             this.gbMatch.TabIndex = 4;
@@ -125,6 +107,7 @@
             this.chkVisible.TabIndex = 0;
             this.chkVisible.Text = "Visible";
             this.chkVisible.UseVisualStyleBackColor = true;
+            this.chkVisible.CheckedChanged += new System.EventHandler(this.chkVisible_CheckedChanged);
             // 
             // chkColor
             // 
@@ -144,6 +127,7 @@
             this.btnColor.Size = new System.Drawing.Size(75, 23);
             this.btnColor.TabIndex = 2;
             this.btnColor.UseVisualStyleBackColor = false;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // chkBColor
             // 
@@ -186,6 +170,10 @@
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
+            // colorChooser
+            // 
+            this.colorChooser.SolidColorOnly = true;
+            // 
             // frmCustomFilters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -198,6 +186,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmCustomFilters";
             this.Text = "Custom Filters";
+            this.Load += new System.EventHandler(this.frmCustomFilters_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.gbMatch.ResumeLayout(false);
@@ -218,9 +207,8 @@
         private System.Windows.Forms.CheckBox chkVisible;
         private System.Windows.Forms.TextBox txtRegex;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.ColorDialog colorChooser;
     }
 }
