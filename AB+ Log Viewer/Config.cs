@@ -25,7 +25,7 @@ namespace AB__Log_Viewer
                 Save();
             }
 
-            Inst = JsonConvert.DeserializeObject<Config>("config.json");
+            Inst = JsonConvert.DeserializeObject<Config>(File.ReadAllText("config.json"));
         }
 
         public static void Save()
