@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,7 +17,10 @@ namespace AB__Log_Viewer
         public frmMain()
         {
             InitializeComponent();
+            Instance = this; //Unsafe, dirty and whatever you want, but meh
         }
+
+        public static frmMain Instance;
 
         private string[] LastLines = new string[0];
 
@@ -112,7 +116,6 @@ namespace AB__Log_Viewer
             string[] lines = new string[0];
             try
             {
-                //string p = "C:/Users/pipe_/Documents/My Games/Binding of Isaac Afterbirth+/log.txt";
                 string p = Path.Combine(LogPath, "log.txt");
                 using (var stream = new FileStream(p, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
@@ -142,10 +145,30 @@ namespace AB__Log_Viewer
                     bool error = IsErrorLine(item);
                     bool debug = IsDebugLine(item);
                     bool info = IsInfoLine(item);
+                    bool visible = ShouldSee(item);
 
                     itm.ForeColor = error ? Color.Red : debug ? Color.DarkOrange : Color.Black;
 
-                    if (!((error && !chkError.Checked) || (debug && !chkDebug.Checked) || (info && !chkInfo.Checked)))
+                    if (info)
+                    {
+                        foreach (var filter in Config.Inst.CustomFilters)
+                        {
+                            if (filter.Enabled && Regex.IsMatch(item, filter.Regex))
+                            {
+                                visible = filter.Visible;
+                                if (filter.BackEnable)
+                                {
+                                    itm.BackColor = filter.BackColor;
+                                }
+                                if (filter.ForeEnable)
+                                {
+                                    itm.ForeColor = filter.ForeColor;
+                                }
+                            }
+                        }
+                    }
+
+                    if (visible)
                     {
                         lvLog.Items.Add(itm);
                     }
@@ -156,6 +179,12 @@ namespace AB__Log_Viewer
                 if (lvLog.Items.Count > 0)
                     lvLog.Items[lvLog.Items.Count - 1].EnsureVisible();
             }
+        }
+
+        public void Reload()
+        {
+            ClearAll();
+            LoadChanges();
         }
 
         public void ClearAll()
@@ -181,8 +210,7 @@ namespace AB__Log_Viewer
 
         public bool ShouldSee(string line)
         {
-            //return !((IsErrorLine(line) && !chkError.Checked) || (IsDebugLine(line) && !chkDebug.Checked) || (IsInfoLine(line) && !chkInfo.Checked));
-            return true;
+            return !((IsErrorLine(line) && !chkError.Checked) || (IsDebugLine(line) && !chkDebug.Checked) || (IsInfoLine(line) && !chkInfo.Checked));
         }
 
         private void chkInfo_CheckedChanged(object sender, EventArgs e)

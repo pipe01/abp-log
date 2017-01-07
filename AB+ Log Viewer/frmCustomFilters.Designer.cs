@@ -30,14 +30,15 @@
         {
             this.lbFilters = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtRegex = new System.Windows.Forms.TextBox();
             this.gbMatch = new System.Windows.Forms.GroupBox();
-            this.chkVisible = new System.Windows.Forms.CheckBox();
-            this.chkColor = new System.Windows.Forms.CheckBox();
-            this.btnColor = new System.Windows.Forms.Button();
-            this.chkBColor = new System.Windows.Forms.CheckBox();
+            this.chkEnabled = new System.Windows.Forms.CheckBox();
             this.btnBColor = new System.Windows.Forms.Button();
+            this.chkBColor = new System.Windows.Forms.CheckBox();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.chkColor = new System.Windows.Forms.CheckBox();
+            this.chkVisible = new System.Windows.Forms.CheckBox();
+            this.txtRegex = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.colorChooser = new System.Windows.Forms.ColorDialog();
@@ -56,6 +57,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkEnabled);
             this.panel1.Controls.Add(this.gbMatch);
             this.panel1.Controls.Add(this.txtRegex);
             this.panel1.Controls.Add(this.label2);
@@ -65,23 +67,6 @@
             this.panel1.Size = new System.Drawing.Size(183, 160);
             this.panel1.TabIndex = 1;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Regex:";
-            // 
-            // txtRegex
-            // 
-            this.txtRegex.Location = new System.Drawing.Point(56, 7);
-            this.txtRegex.Name = "txtRegex";
-            this.txtRegex.Size = new System.Drawing.Size(124, 20);
-            this.txtRegex.TabIndex = 3;
-            this.txtRegex.TextChanged += new System.EventHandler(this.txtRegex_TextChanged);
-            // 
             // gbMatch
             // 
             this.gbMatch.Controls.Add(this.btnBColor);
@@ -89,12 +74,65 @@
             this.gbMatch.Controls.Add(this.btnColor);
             this.gbMatch.Controls.Add(this.chkColor);
             this.gbMatch.Controls.Add(this.chkVisible);
-            this.gbMatch.Location = new System.Drawing.Point(3, 38);
+            this.gbMatch.Location = new System.Drawing.Point(3, 56);
             this.gbMatch.Name = "gbMatch";
-            this.gbMatch.Size = new System.Drawing.Size(177, 99);
+            this.gbMatch.Size = new System.Drawing.Size(177, 101);
             this.gbMatch.TabIndex = 4;
             this.gbMatch.TabStop = false;
             this.gbMatch.Text = "Items that match";
+            // 
+            // chkEnabled
+            // 
+            this.chkEnabled.AutoSize = true;
+            this.chkEnabled.Location = new System.Drawing.Point(9, 33);
+            this.chkEnabled.Name = "chkEnabled";
+            this.chkEnabled.Size = new System.Drawing.Size(65, 17);
+            this.chkEnabled.TabIndex = 5;
+            this.chkEnabled.Text = "Enabled";
+            this.chkEnabled.UseVisualStyleBackColor = true;
+            this.chkEnabled.CheckedChanged += new System.EventHandler(this.chkEnabled_CheckedChanged);
+            // 
+            // btnBColor
+            // 
+            this.btnBColor.BackColor = System.Drawing.Color.White;
+            this.btnBColor.Location = new System.Drawing.Point(85, 68);
+            this.btnBColor.Name = "btnBColor";
+            this.btnBColor.Size = new System.Drawing.Size(75, 23);
+            this.btnBColor.TabIndex = 4;
+            this.btnBColor.UseVisualStyleBackColor = false;
+            this.btnBColor.Click += new System.EventHandler(this.btnBColor_Click);
+            // 
+            // chkBColor
+            // 
+            this.chkBColor.AutoSize = true;
+            this.chkBColor.Location = new System.Drawing.Point(6, 71);
+            this.chkBColor.Name = "chkBColor";
+            this.chkBColor.Size = new System.Drawing.Size(77, 17);
+            this.chkBColor.TabIndex = 3;
+            this.chkBColor.Text = "Back color";
+            this.chkBColor.UseVisualStyleBackColor = true;
+            this.chkBColor.CheckedChanged += new System.EventHandler(this.chkBColor_CheckedChanged);
+            // 
+            // btnColor
+            // 
+            this.btnColor.BackColor = System.Drawing.Color.Black;
+            this.btnColor.Location = new System.Drawing.Point(85, 40);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(75, 23);
+            this.btnColor.TabIndex = 2;
+            this.btnColor.UseVisualStyleBackColor = false;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // chkColor
+            // 
+            this.chkColor.AutoSize = true;
+            this.chkColor.Location = new System.Drawing.Point(6, 44);
+            this.chkColor.Name = "chkColor";
+            this.chkColor.Size = new System.Drawing.Size(73, 17);
+            this.chkColor.TabIndex = 1;
+            this.chkColor.Text = "Text color";
+            this.chkColor.UseVisualStyleBackColor = true;
+            this.chkColor.CheckedChanged += new System.EventHandler(this.chkColor_CheckedChanged);
             // 
             // chkVisible
             // 
@@ -109,44 +147,22 @@
             this.chkVisible.UseVisualStyleBackColor = true;
             this.chkVisible.CheckedChanged += new System.EventHandler(this.chkVisible_CheckedChanged);
             // 
-            // chkColor
+            // txtRegex
             // 
-            this.chkColor.AutoSize = true;
-            this.chkColor.Location = new System.Drawing.Point(6, 44);
-            this.chkColor.Name = "chkColor";
-            this.chkColor.Size = new System.Drawing.Size(73, 17);
-            this.chkColor.TabIndex = 1;
-            this.chkColor.Text = "Text color";
-            this.chkColor.UseVisualStyleBackColor = true;
+            this.txtRegex.Location = new System.Drawing.Point(56, 7);
+            this.txtRegex.Name = "txtRegex";
+            this.txtRegex.Size = new System.Drawing.Size(124, 20);
+            this.txtRegex.TabIndex = 3;
+            this.txtRegex.TextChanged += new System.EventHandler(this.txtRegex_TextChanged);
             // 
-            // btnColor
+            // label2
             // 
-            this.btnColor.BackColor = System.Drawing.Color.Black;
-            this.btnColor.Location = new System.Drawing.Point(85, 40);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(75, 23);
-            this.btnColor.TabIndex = 2;
-            this.btnColor.UseVisualStyleBackColor = false;
-            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
-            // 
-            // chkBColor
-            // 
-            this.chkBColor.AutoSize = true;
-            this.chkBColor.Location = new System.Drawing.Point(6, 71);
-            this.chkBColor.Name = "chkBColor";
-            this.chkBColor.Size = new System.Drawing.Size(77, 17);
-            this.chkBColor.TabIndex = 3;
-            this.chkBColor.Text = "Back color";
-            this.chkBColor.UseVisualStyleBackColor = true;
-            // 
-            // btnBColor
-            // 
-            this.btnBColor.BackColor = System.Drawing.Color.White;
-            this.btnBColor.Location = new System.Drawing.Point(85, 68);
-            this.btnBColor.Name = "btnBColor";
-            this.btnBColor.Size = new System.Drawing.Size(75, 23);
-            this.btnBColor.TabIndex = 4;
-            this.btnBColor.UseVisualStyleBackColor = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Regex:";
             // 
             // btnAdd
             // 
@@ -186,6 +202,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmCustomFilters";
             this.Text = "Custom Filters";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCustomFilters_FormClosing);
             this.Load += new System.EventHandler(this.frmCustomFilters_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -210,5 +227,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ColorDialog colorChooser;
+        private System.Windows.Forms.CheckBox chkEnabled;
     }
 }

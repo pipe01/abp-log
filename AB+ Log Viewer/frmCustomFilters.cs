@@ -17,6 +17,14 @@ namespace AB__Log_Viewer
             InitializeComponent();
         }
         
+        private CustomFilter Selected
+        {
+            get
+            {
+                return Config.Inst.CustomFilters[lbFilters.SelectedIndex];
+            }
+        }
+
         public void LoadFilters()
         {
             lbFilters.Items.Clear();
@@ -28,7 +36,7 @@ namespace AB__Log_Viewer
 
         public void LoadSelected()
         {
-            var sel = Config.Inst.CustomFilters[lbFilters.SelectedIndex];
+            var sel = Selected;
 
             txtRegex.Text = sel.Regex;
 
@@ -77,30 +85,64 @@ namespace AB__Log_Viewer
         {
             if (lbFilters.SelectedItems.Count == 1)
             {
-                panel1.Enabled = false;
+                panel1.Enabled = true;
+                LoadSelected();
 
             }
             else
             {
-                panel1.Enabled = true;
+                panel1.Enabled = false;
             }
         }
 
         private void txtRegex_TextChanged(object sender, EventArgs e)
         {
-            var sel = Config.Inst.CustomFilters[lbFilters.SelectedIndex];
-            sel.Regex = txtRegex.Text;
+            Selected.Regex = txtRegex.Text;
         }
 
         private void chkVisible_CheckedChanged(object sender, EventArgs e)
         {
-            var sel = Config.Inst.CustomFilters[lbFilters.SelectedIndex];
-            sel.Visible = chkVisible.Checked;
+            Selected.Visible = chkVisible.Checked;
         }
 
         private void btnColor_Click(object sender, EventArgs e)
         {
+            colorChooser.Color = btnColor.ForeColor;
+            if (colorChooser.ShowDialog() == DialogResult.OK)
+            {
+                Selected.ForeColor = colorChooser.Color;
+                btnColor.BackColor = colorChooser.Color;
+            }
+        }
+
+        private void btnBColor_Click(object sender, EventArgs e)
+        {
             colorChooser.Color = btnColor.BackColor;
+            if (colorChooser.ShowDialog() == DialogResult.OK)
+            {
+                Selected.BackColor = colorChooser.Color;
+                btnBColor.BackColor = colorChooser.Color;
+            }
+        }
+
+        private void chkColor_CheckedChanged(object sender, EventArgs e)
+        {
+            Selected.ForeEnable = chkColor.Checked;
+        }
+
+        private void chkBColor_CheckedChanged(object sender, EventArgs e)
+        {
+            Selected.BackEnable = chkBColor.Checked;
+        }
+
+        private void chkEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            Selected.Enabled = chkEnabled.Checked;
+        }
+
+        private void frmCustomFilters_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            frmMain.Instance.Reload();
         }
     }
 }
