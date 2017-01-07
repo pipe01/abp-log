@@ -14,7 +14,7 @@ namespace AB__Log_Viewer
 
 
         public string LogPath;
-
+        public CustomFilter[] CustomFilters = new CustomFilter[0];
 
 
         public static void Load()

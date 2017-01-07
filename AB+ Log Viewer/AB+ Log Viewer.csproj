@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="CustomFilter.cs" />
     <Compile Include="frmCustomFilters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +65,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util.cs" />
     <EmbeddedResource Include="frmCustomFilters.resx">
       <DependentUpon>frmCustomFilters.cs</DependentUpon>
     </EmbeddedResource>

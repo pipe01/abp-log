@@ -60,7 +60,7 @@ namespace AB__Log_Viewer
         private void Form1_Load(object sender, EventArgs e)
         {
             Config.Load();
-
+            
             ColumnHeader header = new ColumnHeader();
             header.Text = "";
             header.Name = "col1";
