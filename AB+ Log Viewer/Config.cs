@@ -21,6 +21,7 @@ namespace AB__Log_Viewer
         {
             if (!File.Exists("config.json"))
             {
+                Inst = new Config();
                 Save();
             }
 
