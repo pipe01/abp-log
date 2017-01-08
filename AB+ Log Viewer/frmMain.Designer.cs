@@ -28,160 +28,190 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtLogPath = new System.Windows.Forms.TextBox();
-            this.lvLog = new System.Windows.Forms.ListView();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnBrowse = new System.Windows.Forms.Button();
-            this.ofdLog = new System.Windows.Forms.OpenFileDialog();
-            this.chkInfo = new System.Windows.Forms.CheckBox();
-            this.chkError = new System.Windows.Forms.CheckBox();
-            this.chkDebug = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Log path:";
-            // 
-            // txtLogPath
-            // 
-            this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+               this.components = new System.ComponentModel.Container();
+               this.label1 = new System.Windows.Forms.Label();
+               this.txtLogPath = new System.Windows.Forms.TextBox();
+               this.lvLog = new System.Windows.Forms.ListView();
+               this.btnUpdate = new System.Windows.Forms.Button();
+               this.timer1 = new System.Windows.Forms.Timer(this.components);
+               this.btnBrowse = new System.Windows.Forms.Button();
+               this.ofdLog = new System.Windows.Forms.OpenFileDialog();
+               this.chkInfo = new System.Windows.Forms.CheckBox();
+               this.chkError = new System.Windows.Forms.CheckBox();
+               this.chkDebug = new System.Windows.Forms.CheckBox();
+               this.button1 = new System.Windows.Forms.Button();
+               this.btnClearLogs = new System.Windows.Forms.Button();
+               this.checkBoxTimstamp = new System.Windows.Forms.CheckBox();
+               this.SuspendLayout();
+               // 
+               // label1
+               // 
+               this.label1.AutoSize = true;
+               this.label1.Location = new System.Drawing.Point(12, 13);
+               this.label1.Name = "label1";
+               this.label1.Size = new System.Drawing.Size(52, 13);
+               this.label1.TabIndex = 0;
+               this.label1.Text = "Log path:";
+               // 
+               // txtLogPath
+               // 
+               this.txtLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLogPath.Location = new System.Drawing.Point(70, 10);
-            this.txtLogPath.Name = "txtLogPath";
-            this.txtLogPath.Size = new System.Drawing.Size(506, 20);
-            this.txtLogPath.TabIndex = 1;
-            this.txtLogPath.TextChanged += new System.EventHandler(this.txtLogPath_TextChanged);
-            // 
-            // lvLog
-            // 
-            this.lvLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+               this.txtLogPath.Location = new System.Drawing.Point(70, 10);
+               this.txtLogPath.Name = "txtLogPath";
+               this.txtLogPath.Size = new System.Drawing.Size(506, 20);
+               this.txtLogPath.TabIndex = 1;
+               this.txtLogPath.TextChanged += new System.EventHandler(this.txtLogPath_TextChanged);
+               // 
+               // lvLog
+               // 
+               this.lvLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvLog.FullRowSelect = true;
-            this.lvLog.Location = new System.Drawing.Point(12, 36);
-            this.lvLog.Name = "lvLog";
-            this.lvLog.Size = new System.Drawing.Size(614, 299);
-            this.lvLog.TabIndex = 2;
-            this.lvLog.UseCompatibleStateImageBehavior = false;
-            this.lvLog.View = System.Windows.Forms.View.Details;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUpdate.Location = new System.Drawing.Point(12, 362);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(98, 23);
-            this.btnUpdate.TabIndex = 3;
-            this.btnUpdate.Text = "Manual update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.Location = new System.Drawing.Point(582, 8);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(44, 23);
-            this.btnBrowse.TabIndex = 5;
-            this.btnBrowse.Text = ". . .";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
-            // ofdLog
-            // 
-            this.ofdLog.Filter = "log.txt|log.txt|All files|*.*";
-            // 
-            // chkInfo
-            // 
-            this.chkInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkInfo.AutoSize = true;
-            this.chkInfo.Checked = true;
-            this.chkInfo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkInfo.Location = new System.Drawing.Point(15, 341);
-            this.chkInfo.Name = "chkInfo";
-            this.chkInfo.Size = new System.Drawing.Size(90, 17);
-            this.chkInfo.TabIndex = 6;
-            this.chkInfo.Text = "Show info log";
-            this.chkInfo.UseVisualStyleBackColor = true;
-            this.chkInfo.CheckedChanged += new System.EventHandler(this.chkInfo_CheckedChanged);
-            // 
-            // chkError
-            // 
-            this.chkError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkError.AutoSize = true;
-            this.chkError.Checked = true;
-            this.chkError.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkError.Location = new System.Drawing.Point(111, 341);
-            this.chkError.Name = "chkError";
-            this.chkError.Size = new System.Drawing.Size(94, 17);
-            this.chkError.TabIndex = 7;
-            this.chkError.Text = "Show error log";
-            this.chkError.UseVisualStyleBackColor = true;
-            this.chkError.CheckedChanged += new System.EventHandler(this.chkInfo_CheckedChanged);
-            // 
-            // chkDebug
-            // 
-            this.chkDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDebug.AutoSize = true;
-            this.chkDebug.Checked = true;
-            this.chkDebug.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDebug.Location = new System.Drawing.Point(211, 341);
-            this.chkDebug.Name = "chkDebug";
-            this.chkDebug.Size = new System.Drawing.Size(124, 17);
-            this.chkDebug.TabIndex = 8;
-            this.chkDebug.Text = "Show Lua debug log";
-            this.chkDebug.UseVisualStyleBackColor = true;
-            this.chkDebug.CheckedChanged += new System.EventHandler(this.chkInfo_CheckedChanged);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(116, 362);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Custom filters";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // frmMain
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 397);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.chkDebug);
-            this.Controls.Add(this.chkError);
-            this.Controls.Add(this.chkInfo);
-            this.Controls.Add(this.btnBrowse);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.lvLog);
-            this.Controls.Add(this.txtLogPath);
-            this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(654, 197);
-            this.Name = "frmMain";
-            this.Text = "The Binding of Isaac: Afterbirth+ real-time log viewer by pipe01";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+               this.lvLog.FullRowSelect = true;
+               this.lvLog.Location = new System.Drawing.Point(12, 36);
+               this.lvLog.Name = "lvLog";
+               this.lvLog.Size = new System.Drawing.Size(614, 299);
+               this.lvLog.TabIndex = 2;
+               this.lvLog.UseCompatibleStateImageBehavior = false;
+               this.lvLog.View = System.Windows.Forms.View.Details;
+               // 
+               // btnUpdate
+               // 
+               this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+               this.btnUpdate.Location = new System.Drawing.Point(12, 362);
+               this.btnUpdate.Name = "btnUpdate";
+               this.btnUpdate.Size = new System.Drawing.Size(98, 23);
+               this.btnUpdate.TabIndex = 3;
+               this.btnUpdate.Text = "Show all of log";
+               this.btnUpdate.UseVisualStyleBackColor = true;
+               this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+               // 
+               // timer1
+               // 
+               this.timer1.Enabled = true;
+               this.timer1.Interval = 1000;
+               this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+               // 
+               // btnBrowse
+               // 
+               this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+               this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.btnBrowse.Location = new System.Drawing.Point(582, 8);
+               this.btnBrowse.Name = "btnBrowse";
+               this.btnBrowse.Size = new System.Drawing.Size(44, 23);
+               this.btnBrowse.TabIndex = 5;
+               this.btnBrowse.Text = ". . .";
+               this.btnBrowse.UseVisualStyleBackColor = true;
+               this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+               // 
+               // ofdLog
+               // 
+               this.ofdLog.Filter = "log.txt|log.txt|All files|*.*";
+               // 
+               // chkInfo
+               // 
+               this.chkInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+               this.chkInfo.AutoSize = true;
+               this.chkInfo.Checked = true;
+               this.chkInfo.CheckState = System.Windows.Forms.CheckState.Checked;
+               this.chkInfo.Location = new System.Drawing.Point(15, 341);
+               this.chkInfo.Name = "chkInfo";
+               this.chkInfo.Size = new System.Drawing.Size(90, 17);
+               this.chkInfo.TabIndex = 6;
+               this.chkInfo.Text = "Show info log";
+               this.chkInfo.UseVisualStyleBackColor = true;
+               this.chkInfo.CheckedChanged += new System.EventHandler(this.chkInfo_CheckedChanged);
+               // 
+               // chkError
+               // 
+               this.chkError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+               this.chkError.AutoSize = true;
+               this.chkError.Checked = true;
+               this.chkError.CheckState = System.Windows.Forms.CheckState.Checked;
+               this.chkError.Location = new System.Drawing.Point(111, 341);
+               this.chkError.Name = "chkError";
+               this.chkError.Size = new System.Drawing.Size(94, 17);
+               this.chkError.TabIndex = 7;
+               this.chkError.Text = "Show error log";
+               this.chkError.UseVisualStyleBackColor = true;
+               this.chkError.CheckedChanged += new System.EventHandler(this.chkInfo_CheckedChanged);
+               // 
+               // chkDebug
+               // 
+               this.chkDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+               this.chkDebug.AutoSize = true;
+               this.chkDebug.Checked = true;
+               this.chkDebug.CheckState = System.Windows.Forms.CheckState.Checked;
+               this.chkDebug.Location = new System.Drawing.Point(211, 341);
+               this.chkDebug.Name = "chkDebug";
+               this.chkDebug.Size = new System.Drawing.Size(124, 17);
+               this.chkDebug.TabIndex = 8;
+               this.chkDebug.Text = "Show Lua debug log";
+               this.chkDebug.UseVisualStyleBackColor = true;
+               this.chkDebug.CheckedChanged += new System.EventHandler(this.chkInfo_CheckedChanged);
+               // 
+               // button1
+               // 
+               this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+               this.button1.Location = new System.Drawing.Point(116, 362);
+               this.button1.Name = "button1";
+               this.button1.Size = new System.Drawing.Size(98, 23);
+               this.button1.TabIndex = 9;
+               this.button1.Text = "Custom filters";
+               this.button1.UseVisualStyleBackColor = true;
+               this.button1.Click += new System.EventHandler(this.button1_Click);
+               // 
+               // btnClearLogs
+               // 
+               this.btnClearLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+               this.btnClearLogs.Location = new System.Drawing.Point(220, 362);
+               this.btnClearLogs.Name = "btnClearLogs";
+               this.btnClearLogs.Size = new System.Drawing.Size(98, 23);
+               this.btnClearLogs.TabIndex = 10;
+               this.btnClearLogs.Text = "Clear log";
+               this.btnClearLogs.UseVisualStyleBackColor = true;
+               this.btnClearLogs.Click += new System.EventHandler(this.btnClearLogs_Click);
+               // 
+               // checkBoxTimstamp
+               // 
+               this.checkBoxTimstamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+               this.checkBoxTimstamp.AutoSize = true;
+               this.checkBoxTimstamp.Checked = true;
+               this.checkBoxTimstamp.CheckState = System.Windows.Forms.CheckState.Checked;
+               this.checkBoxTimstamp.Location = new System.Drawing.Point(341, 341);
+               this.checkBoxTimstamp.Name = "checkBoxTimstamp";
+               this.checkBoxTimstamp.Size = new System.Drawing.Size(106, 17);
+               this.checkBoxTimstamp.TabIndex = 11;
+               this.checkBoxTimstamp.Text = "Show time stamp";
+               this.checkBoxTimstamp.UseVisualStyleBackColor = true;
+               this.checkBoxTimstamp.CheckedChanged += new System.EventHandler(this.checkBoxTimstamp_CheckedChanged);
+               // 
+               // frmMain
+               // 
+               this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+               this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+               this.ClientSize = new System.Drawing.Size(638, 397);
+               this.Controls.Add(this.checkBoxTimstamp);
+               this.Controls.Add(this.btnClearLogs);
+               this.Controls.Add(this.button1);
+               this.Controls.Add(this.chkDebug);
+               this.Controls.Add(this.chkError);
+               this.Controls.Add(this.chkInfo);
+               this.Controls.Add(this.btnBrowse);
+               this.Controls.Add(this.btnUpdate);
+               this.Controls.Add(this.lvLog);
+               this.Controls.Add(this.txtLogPath);
+               this.Controls.Add(this.label1);
+               this.MinimumSize = new System.Drawing.Size(654, 197);
+               this.Name = "frmMain";
+               this.ShowIcon = false;
+               this.Text = "The Binding of Isaac: Afterbirth+ real-time log viewer by pipe01";
+               this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+               this.Load += new System.EventHandler(this.Form1_Load);
+               this.Resize += new System.EventHandler(this.Form1_Resize);
+               this.ResumeLayout(false);
+               this.PerformLayout();
 
         }
 
@@ -198,6 +228,8 @@
         private System.Windows.Forms.CheckBox chkError;
         private System.Windows.Forms.CheckBox chkDebug;
         private System.Windows.Forms.Button button1;
-    }
+          private System.Windows.Forms.Button btnClearLogs;
+          private System.Windows.Forms.CheckBox checkBoxTimstamp;
+     }
 }
 

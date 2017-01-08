@@ -17,6 +17,7 @@ namespace AB__Log_Viewer
             InitializeComponent();
         }
         
+        
         private CustomFilter Selected
         {
             get
