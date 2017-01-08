@@ -22,18 +22,13 @@ namespace AB__Log_Viewer
 
         public static frmMain Instance;
 
+        private Dictionary<int,string> lineNumberTimestamp = new Dictionary<int, string>();
         private string[] LastLines = new string[0];
-
+        private int ReadAfterLine = 0;
         private string LogPath
         {
-            get
-            {
-                return Config.Inst.LogPath;
-            }
-            set
-            {
-                Config.Inst.LogPath = value;
-            }
+            get { return Config.Inst.LogPath;  }
+            set { Config.Inst.LogPath = value; }
         }
 
         #region Forms
@@ -65,12 +60,17 @@ namespace AB__Log_Viewer
         {
             Config.Load();
             
+            ColumnHeader timeStampHeader = new ColumnHeader();
+            timeStampHeader.Text = "";
+            timeStampHeader.Name = "col0";
+
             ColumnHeader header = new ColumnHeader();
             header.Text = "";
             header.Name = "col1";
+
             lvLog.HeaderStyle = ColumnHeaderStyle.None;
+            lvLog.Columns.Add(timeStampHeader);
             lvLog.Columns.Add(header);
-            lvLog.AutoResizeColumns(ColumnHeaderAutoResizeStyle.Head‌​erSize);
 
             txtLogPath.Text = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
@@ -81,12 +81,15 @@ namespace AB__Log_Viewer
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            LastLines = new string[0];
+            ReadAfterLine = 0;
+            ClearAll();
             LoadChanges();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            lvLog.AutoResizeColumns(ColumnHeaderAutoResizeStyle.Head‌​erSize);
+            UpdateColumsWidths();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -106,6 +109,29 @@ namespace AB__Log_Viewer
         {
             Config.Save();
         }
+
+        private void chkInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            Reload();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new frmCustomFilters().Show();
+        }
+
+        private void btnClearLogs_Click(object sender, EventArgs e)
+        {
+               // As we can't clear the log file. Keep track of where we have currently read upto. And then read after that number
+               ReadAfterLine = LastLines.Length;
+               lvLog.Items.Clear();
+        }
+
+        private void checkBoxTimstamp_CheckedChanged(object sender, EventArgs e)
+        {
+               UpdateColumsWidths();
+        }
+
         #endregion
 
         #region Logic
@@ -135,47 +161,68 @@ namespace AB__Log_Viewer
                 MessageBox.Show("Can't access the specified path: Access denied", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (!lines.SequenceEqual(LastLines))
             {
+             
+               lvLog.BeginUpdate();
+                       
                 var dif = lines.Except(LastLines);
                 for (int i = LastLines.Length; i < lines.Length; i++)
                 {
+                    string CurTimestamp = string.Format("[{0}]", DateTime.Now.TimeOfDay.ToString());
+
+                    if(ReadAfterLine > i)
+                         continue;
+
+                    if(!lineNumberTimestamp.ContainsKey(i))
+                         lineNumberTimestamp.Add(i,CurTimestamp);
+
                     string item = lines[i];
-                    ListViewItem itm = new ListViewItem(item);
+                    ListViewItem itm = new ListViewItem(lineNumberTimestamp[i]);
+                    itm.UseItemStyleForSubItems = false;
+                    
                     bool error = IsErrorLine(item);
                     bool debug = IsDebugLine(item);
                     bool info = IsInfoLine(item);
                     bool visible = ShouldSee(item);
 
-                    itm.ForeColor = error ? Color.Red : debug ? Color.DarkOrange : Color.Black;
+                    if (!visible)
+                         continue;
+                    
+                    lvLog.Items.Add(itm);
+                    itm.SubItems.Add(item);
+
+                    itm.SubItems[1].ForeColor = error ? Color.Red : debug ? Color.DarkOrange : Color.Black;
 
                     if (info)
                     {
                         foreach (var filter in Config.Inst.CustomFilters)
                         {
-                            if (filter.Enabled && Regex.IsMatch(item, filter.Regex))
-                            {
-                                visible = filter.Visible;
-                                if (filter.BackEnable)
-                                {
-                                    itm.BackColor = filter.BackColor;
-                                }
-                                if (filter.ForeEnable)
-                                {
-                                    itm.ForeColor = filter.ForeColor;
-                                }
-                            }
+                              if (filter.Enabled && Regex.IsMatch(item, filter.Regex))
+                              {
+                                   if(!filter.Visible)
+                                        itm.Remove();
+
+                                   if (filter.BackEnable)
+                                   {
+                                        itm.SubItems[1].BackColor = filter.BackColor;
+                                   }
+                                   if (filter.ForeEnable)
+                                   {
+                                        itm.SubItems[1].ForeColor = filter.ForeColor;
+                                   }
+                              }
                         }
                     }
 
-                    if (visible)
-                    {
-                        lvLog.Items.Add(itm);
-                    }
                 }
+                
+                lvLog.EndUpdate();
+
+                UpdateColumsWidths();
 
                 LastLines = lines;
-
                 if (lvLog.Items.Count > 0)
                     lvLog.Items[lvLog.Items.Count - 1].EnsureVisible();
             }
@@ -183,13 +230,13 @@ namespace AB__Log_Viewer
 
         public void Reload()
         {
+            LastLines = new string[ReadAfterLine];
             ClearAll();
             LoadChanges();
         }
 
         public void ClearAll()
         {
-            LastLines = new string[0];
             lvLog.Items.Clear();
         }
 
@@ -213,16 +260,16 @@ namespace AB__Log_Viewer
             return !((IsErrorLine(line) && !chkError.Checked) || (IsDebugLine(line) && !chkDebug.Checked) || (IsInfoLine(line) && !chkInfo.Checked));
         }
 
-        private void chkInfo_CheckedChanged(object sender, EventArgs e)
+        private void UpdateColumsWidths()
         {
-            ClearAll();
-            LoadChanges();
+               lvLog.BeginUpdate();
+               lvLog.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+               if (!checkBoxTimstamp.Checked)
+                    lvLog.Columns[0].Width = 0;
+               lvLog.EndUpdate();
         }
         #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new frmCustomFilters().Show();
-        }
-    }
+        
+     }
 }
