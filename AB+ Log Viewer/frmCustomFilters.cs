@@ -47,6 +47,8 @@ namespace AB__Log_Viewer
             chkBColor.Checked = sel.BackEnable;
 
             chkVisible.Checked = sel.Visible;
+
+            chkEnabled.Checked = sel.Enabled;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

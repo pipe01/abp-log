@@ -37,6 +37,11 @@ namespace AB__Log_Viewer
         }
 
         #region Forms
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new frmCustomFilters().Show();
+        }
+
         private void txtLogPath_TextChanged(object sender, EventArgs e)
         {
             if (File.Exists(Path.Combine(txtLogPath.Text, "log.txt")))
@@ -135,6 +140,10 @@ namespace AB__Log_Viewer
                 MessageBox.Show("Can't access the specified path: Access denied", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            /*if (lines.Length < LastLines.Length)
+            {
+                LastLines.Take(lines.Length);
+            }*/
             if (!lines.SequenceEqual(LastLines))
             {
                 var dif = lines.Except(LastLines);
@@ -219,10 +228,5 @@ namespace AB__Log_Viewer
             LoadChanges();
         }
         #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new frmCustomFilters().Show();
-        }
     }
 }
